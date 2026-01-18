@@ -2,13 +2,17 @@
 
 List<string> outcomes = new List<string>();
 
-List<string> ProjectPaths = [
+/*List<string> ProjectPaths = [
     "/home/zsombor/Workspace/University/Academic/repos/Final-Year-Project-Management-System",
     "/home/zsombor/Workspace/University/Academic/repos/jellyfin",
     "/home/zsombor/Workspace/University/Academic/repos/University-Management-System",
     //"/home/zsombor/Workspace/University/Academic/repos/REMS",
     "/home/zsombor/Workspace/University/Academic/repos/PDFsharp",
     "/home/zsombor/Workspace/University/Academic/repos/Student-Management-System"];
+*/
+
+List<string> ProjectPaths = new List<string>();
+ProjectPaths.Add("C:\\Users\\mikol\\OneDrive\\Pulpit\\Metrics\\Csharp-metrics-tool");
 
 foreach (var path in ProjectPaths)
 {
@@ -56,6 +60,10 @@ foreach (var path in ProjectPaths)
 
     metricAnalyzer.AddMetric(new HalsteadEffort());
 
+    metricAnalyzer.AddMetric(new AverageFunctionSize());
+
+    metricAnalyzer.AddMetric(new AverageClassSize());
+
     metricAnalyzer.RunMetrics();
 
     metricAnalyzer.AnalyzeClasses(files.ToArray());
@@ -68,6 +76,8 @@ foreach (var outcome in outcomes)
 {
     Console.WriteLine(outcome);
 }
+
+Console.ReadKey();
 
 
 
