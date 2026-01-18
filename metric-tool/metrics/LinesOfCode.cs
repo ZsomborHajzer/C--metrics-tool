@@ -1,19 +1,19 @@
 public class LinesOfCode : IMetric
 {
     private int _lineCount;
-    private readonly Func<List<Document>, string> _func;
+    private readonly Func<List<Document>, (string, double)> _func;
 
     public LinesOfCode()
     {
         _func = Implementation;
     }
 
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return _func(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         _lineCount = 0;
 
@@ -22,7 +22,7 @@ public class LinesOfCode : IMetric
             _lineCount += doc.DocumentLines.Count;
         }
 
-         return $"Lines of Code (including comments): {_lineCount}";
+         return ($"Lines of Code (including comments): {_lineCount}", _lineCount);
     }
 }
 

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 class LambdaFunctionCounter : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         int total = 0;
         foreach(var doc in docs)
@@ -26,6 +26,6 @@ class LambdaFunctionCounter : IMetric
 
             total += doc.SyntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Count(m => m.Modifiers.Any(mod => mod.IsKind(SyntaxKind.AsyncKeyword)));
         }
-        return $"Lambdas = {total}";
+        return ($"Lambdas = {total}",total);
     }
 }

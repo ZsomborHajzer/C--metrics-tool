@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 class AverageFunctionSize : IMetric
 {
 
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         List<int> functionSizes = new List<int>();
         float avg = 0;
@@ -29,7 +29,7 @@ class AverageFunctionSize : IMetric
             }
         }
         avg = functionSizes.Sum() / functionSizes.Count();
-        return $"The average function size is {avg}";
+        return ($"The average function size is {avg}",avg);
     }
 
 }

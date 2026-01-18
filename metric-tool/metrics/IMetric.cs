@@ -1,4 +1,4 @@
 public interface IMetric
 {
-    string Evaluate(List<Document> doc);
+    (string, double) Evaluate(List<Document> doc);
 }

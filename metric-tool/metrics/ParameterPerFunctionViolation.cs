@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 class ParameterPerFunctionViolation : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs, 4);
     }
 
-    private string Implementation(List<Document> docs, int violationThreshold)
+    private (string, double) Implementation(List<Document> docs, int violationThreshold)
     {
         int violations = 0;
         foreach(var doc in docs)
@@ -27,6 +27,6 @@ class ParameterPerFunctionViolation : IMetric
                 }
             }
         }
-        return $"All parameter violations = {violations}";
+        return ($"All parameter violations = {violations}",violations);
     }
 }

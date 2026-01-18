@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 //Density as Keyowrds/LOC? WIP
 class KeywordDensity : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         float complexityKeywords = 0;
         float LOC = 0; //temporary, should be replaced with something else later
@@ -26,10 +26,8 @@ class KeywordDensity : IMetric
                 n.IsKind(SyntaxKind.ForEachStatement) ||
                 n.IsKind(SyntaxKind.SwitchStatement) ||
                 n.IsKind(SyntaxKind.ConditionalExpression));
-
-            LOC += doc.DocumentLines.Count();
         }
 
-        return $"Complexity keyword density = {complexityKeywords / LOC}";
+        return ($"Complexity keyword count = {complexityKeywords}",complexityKeywords);
     }
 }

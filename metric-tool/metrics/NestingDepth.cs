@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 class NestingDepth : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         List<int> depths = new List<int>();
         foreach(var doc in docs)
@@ -21,7 +21,7 @@ class NestingDepth : IMetric
             var root = doc.SyntaxTree.GetRoot();
             depths.Add(MaxNestingDepth(root, 0));
         }
-        return $"Max nesting depth {depths.Max()} \nAverage nesting depth {depths.Average():0.##}";
+        return ($"Max nesting depth {depths.Max()} \nAverage nesting depth {depths.Average():0.##}",depths.Average());
     }
 
     int MaxNestingDepth(SyntaxNode node, int currentDepth)

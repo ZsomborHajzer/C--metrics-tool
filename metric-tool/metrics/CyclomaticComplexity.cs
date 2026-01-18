@@ -7,12 +7,12 @@ using System.Text.RegularExpressions;
 public class CyclomaticComplexity : IMetric
 {
 
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         int SumCC = 0;
         int MaxCC = 0;
@@ -42,7 +42,7 @@ public class CyclomaticComplexity : IMetric
         }
         AvgCC = SumCC / docs.Count();
 
-        return $"Sum of all cyclomatic complexity = {SumCC} \nDocument with highest cyclomatic complexity is {MaxDoc} = {MaxCC} \nAverage cyclomatic complexity = {AvgCC}";
+        return ($"Sum of all cyclomatic complexity = {SumCC} \nDocument with highest cyclomatic complexity is {MaxDoc} = {MaxCC} \nAverage cyclomatic complexity = {AvgCC}",SumCC);
     }
 }
 

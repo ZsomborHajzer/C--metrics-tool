@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 class AsyncAwaitCounter : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         int total = 0;
         foreach (var doc in docs)
         {
             total += doc.SyntaxTree.GetRoot().DescendantNodes().OfType<AwaitExpressionSyntax>().Count();
         }
-        return $"Async/Awaits = {total}";
+        return ($"Async/Awaits = {total}",total);
     }
 }
 

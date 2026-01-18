@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 class ConcurrencyUsage : IMetric
 {
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return Implementation(docs);
     }
 
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         int total = 0;
         foreach (var doc in docs)
@@ -25,6 +25,6 @@ class ConcurrencyUsage : IMetric
             n.ToString().StartsWith("new Thread") ||
             n.ToString().StartsWith("ThreadPool.QueueUserWorkItem"));
         }
-        return $"Starting concurrency statements = {total}";
+        return ($"Starting concurrency statements = {total}",total);
     }
 }

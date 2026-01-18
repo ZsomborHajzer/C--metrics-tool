@@ -64,6 +64,8 @@ foreach (var path in ProjectPaths)
 
     metricAnalyzer.AddMetric(new AverageClassSize());
 
+    metricAnalyzer.AddMetric(new CMetric());
+
     metricAnalyzer.RunMetrics();
 
     metricAnalyzer.AnalyzeClasses(files.ToArray());

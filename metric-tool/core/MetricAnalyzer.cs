@@ -21,7 +21,7 @@ public class MetricAnalyzer
 
         foreach (var metric in _metrics)
         {
-            _outcomes.Add(metric.Evaluate(_documents));
+            _outcomes.Add(metric.Evaluate(_documents).Item1);
         }
 
     }

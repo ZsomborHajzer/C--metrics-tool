@@ -1,19 +1,19 @@
 public class HalsteadEffort : IMetric
 {
     private double _effort;
-    private readonly Func<List<Document>, string> _func;
+    private readonly Func<List<Document>, (string, double)> _func;
     
     public HalsteadEffort()
     {
         _func = Implementation;
     }
     
-    public string Evaluate(List<Document> docs)
+    public (string, double) Evaluate(List<Document> docs)
     {
         return _func(docs);
     }
     
-    private string Implementation(List<Document> docs)
+    private (string, double) Implementation(List<Document> docs)
     {
         _effort = 0;
         
@@ -83,18 +83,18 @@ public class HalsteadEffort : IMetric
         if (n1 == 0 || n2 == 0)
         {
             _effort = 0;
-            return "Halstead Effort: 0.00 (insufficient data)";
+            return ("Halstead Effort: 0.00 (insufficient data)",0);
         }
-        
-        
-        double vocabulary = n1 + n2;                                    
-        double length = N1 + N2;                                       
-        double calculatedLength = n1 * Math.Log(n1, 2) + n2 * Math.Log(n2, 2); 
-        double volume = length * Math.Log(vocabulary, 2);               
+
+
+        double vocabulary = n1 + n2;
+        double length = N1 + N2;
+        double calculatedLength = n1 * Math.Log(n1, 2) + n2 * Math.Log(n2, 2);
+        double volume = length * Math.Log(vocabulary, 2);
         double difficulty = (n1 / 2.0) * (N2 / (double)n2);            
         _effort = volume * difficulty;                                 
         
-        return $"Halstead Effort: {_effort:F2}";
+        return ($"Halstead Effort: {_effort:F2}",_effort);
     }
     
     private int CountOccurrences(string text, string pattern)
